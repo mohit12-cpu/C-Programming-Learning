@@ -1,0 +1,79 @@
+{
+  "challenges": [
+    {
+      "id": "hello_world",
+      "title": "Hello World",
+      "description": "Write a program that prints 'Hello, World!' to the console.",
+      "difficulty": "easy",
+      "tags": ["basics", "output"],
+      "sampleInput": "",
+      "sampleOutput": "Hello, World!",
+      "solution": "#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}",
+      "hints": [
+        "Use the printf() function to output text",
+        "Remember to include the stdio.h header file",
+        "Don't forget the return 0; statement"
+      ]
+    },
+    {
+      "id": "sum_numbers",
+      "title": "Sum of Two Numbers",
+      "description": "Write a program that takes two integers as input and prints their sum.",
+      "difficulty": "easy",
+      "tags": ["input", "arithmetic"],
+      "sampleInput": "5 3",
+      "sampleOutput": "8",
+      "solution": "#include <stdio.h>\n\nint main() {\n    int a, b;\n    scanf(\"%d %d\", &a, &b);\n    printf(\"%d\\n\", a + b);\n    return 0;\n}",
+      "hints": [
+        "Use scanf() to read input values",
+        "Declare two integer variables to store the numbers",
+        "Add the numbers and print the result"
+      ]
+    },
+    {
+      "id": "find_max",
+      "title": "Find Maximum",
+      "description": "Write a program that finds the maximum of three numbers.",
+      "difficulty": "easy",
+      "tags": ["conditionals", "comparison"],
+      "sampleInput": "10 25 15",
+      "sampleOutput": "25",
+      "solution": "#include <stdio.h>\n\nint main() {\n    int a, b, c;\n    scanf(\"%d %d %d\", &a, &b, &c);\n    \n    int max = a;\n    if (b > max) max = b;\n    if (c > max) max = c;\n    \n    printf(\"%d\\n\", max);\n    return 0;\n}",
+      "hints": [
+        "Read three integers using scanf()",
+        "Use if statements to compare the numbers",
+        "Keep track of the maximum value found so far"
+      ]
+    },
+    {
+      "id": "factorial",
+      "title": "Factorial Calculator",
+      "description": "Write a program that calculates the factorial of a given number.",
+      "difficulty": "medium",
+      "tags": ["loops", "functions"],
+      "sampleInput": "5",
+      "sampleOutput": "120",
+      "solution": "#include <stdio.h>\n\nint factorial(int n) {\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    printf(\"%d\\n\", factorial(n));\n    return 0;\n}",
+      "hints": [
+        "You can use either iteration or recursion",
+        "Remember that 0! = 1 and 1! = 1",
+        "Be careful with large numbers that might cause overflow"
+      ]
+    },
+    {
+      "id": "array_reverse",
+      "title": "Array Reversal",
+      "description": "Write a program that reverses the elements of an array.",
+      "difficulty": "medium",
+      "tags": ["arrays", "pointers"],
+      "sampleInput": "5\n1 2 3 4 5",
+      "sampleOutput": "5 4 3 2 1",
+      "solution": "#include <stdio.h>\n\nvoid reverseArray(int arr[], int n) {\n    for (int i = 0; i < n/2; i++) {\n        int temp = arr[i];\n        arr[i] = arr[n-1-i];\n        arr[n-1-i] = temp;\n    }\n}\n\nint main() {\n    int n;\n    scanf(\"%d\", &n);\n    int arr[n];\n    \n    for (int i = 0; i < n; i++) {\n        scanf(\"%d\", &arr[i]);\n    }\n    \n    reverseArray(arr, n);\n    \n    for (int i = 0; i < n; i++) {\n        printf(\"%d \", arr[i]);\n    }\n    printf(\"\\n\");\n    \n    return 0;\n}",
+      "hints": [
+        "Swap elements from both ends moving toward the center",
+        "You only need to swap n/2 elements",
+        "Use a temporary variable for swapping"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "basics": {
+    "title": "C Basics Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Which of the following is not a valid data type in C?",
+        "options": ["int", "float", "real", "char"],
+        "correct": 2
+      },
+      {
+        "id": 2,
+        "question": "What is the correct way to declare a variable in C?",
+        "options": ["variable name;", "int name;", "name int;", "declare int name;"],
+        "correct": 1
+      },
+      {
+        "id": 3,
+        "question": "Which function is used to print output in C?",
+        "options": ["print()", "echo()", "printf()", "display()"],
+        "correct": 2
+      }
+    ]
+  },
+  "functions": {
+    "title": "Functions Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is a function in C?",
+        "options": ["A variable", "A block of code that performs a specific task", "A data type", "A loop"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "What is the purpose of the return statement in a function?",
+        "options": ["To exit the program", "To return a value from the function", "To declare a variable", "To print output"],
+        "correct": 1
+      }
+    ]
+  },
+  "arrays": {
+    "title": "Arrays and Pointers Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the index of the first element in an array?",
+        "options": ["1", "0", "-1", "It depends on the array size"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "What does the * operator do with a pointer?",
+        "options": ["Multiplies two numbers", "Declares a pointer", "Dereferences a pointer", "Allocates memory"],
+        "correct": 2
+      }
+    ]
+  }
+}

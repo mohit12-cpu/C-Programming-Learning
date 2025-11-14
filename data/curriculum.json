@@ -1,0 +1,318 @@
+{
+  "modules": {
+    "module0": {
+      "id": "module0",
+      "title": "Getting Started",
+      "description": "Introduction to C programming, setup, and basic concepts",
+      "lessons": {
+        "setup": {
+          "title": "Environment Setup & Hello World",
+          "description": "Learn how to set up your C development environment and write your first program",
+          "content": [
+            {
+              "section": "Introduction to C",
+              "text": "C is a general-purpose programming language developed by Dennis Ritchie at Bell Labs in the early 1970s. It is known for its efficiency, flexibility, and close-to-hardware programming capabilities. C is widely used for system programming, embedded systems, and application development.",
+              "code": "#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}"
+            },
+            {
+              "section": "Setting Up Your Environment",
+              "text": "To write and run C programs, you need a text editor and a compiler. Popular options include GCC (GNU Compiler Collection), Clang, and IDEs like Code::Blocks, Dev-C++, or Visual Studio Code with C extensions.",
+              "code": "// To compile and run a C program from command line:\n// gcc -o hello hello.c\n// ./hello"
+            },
+            {
+              "section": "Understanding the Hello World Program",
+              "text": "Let's break down the Hello World program:\n1. #include <stdio.h> - Includes the standard input/output library\n2. int main() - Entry point of the program\n3. printf() - Function to print text to the console\n4. return 0 - Indicates successful program execution",
+              "code": "#include <stdio.h>\n\nint main() {\n    // This is a comment\n    printf(\"Hello, World!\\n\");  // Print text to console\n    return 0;  // Return success status\n}"
+            }
+          ]
+        },
+        "compilation": {
+          "title": "Compilation Process",
+          "description": "Understanding how C code is transformed into executable programs",
+          "content": [
+            {
+              "section": "Preprocessing",
+              "text": "The preprocessor handles directives that begin with #. It includes header files, expands macros, and performs conditional compilation.",
+              "code": "// Example of preprocessor directives\n#include <stdio.h>\n#define MAX 100\n#if DEBUG\n    printf(\"Debug mode\\n\");\n#endif"
+            },
+            {
+              "section": "Compilation",
+              "text": "The compiler translates the preprocessed C code into assembly language, then into object code (machine code in binary format).",
+              "code": "// Compilation steps:\n// 1. Preprocessing: gcc -E hello.c -o hello.i\n// 2. Compilation: gcc -S hello.i -o hello.s\n// 3. Assembly: gcc -c hello.s -o hello.o\n// 4. Linking: gcc hello.o -o hello"
+            },
+            {
+              "section": "Linking",
+              "text": "The linker combines object files and library functions to create the final executable program.",
+              "code": "// To compile multiple source files:\n// gcc -c file1.c file2.c\n// gcc file1.o file2.o -o program"
+            }
+          ]
+        }
+      },
+      "quiz": {
+        "title": "Module 0 Quiz",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Who developed the C programming language?",
+            "options": ["Bjarne Stroustrup", "Dennis Ritchie", "Linus Torvalds", "Ken Thompson"],
+            "correct": 1
+          },
+          {
+            "id": 2,
+            "question": "What is the purpose of the #include directive?",
+            "options": ["To define a macro", "To include header files", "To declare a variable", "To start the main function"],
+            "correct": 1
+          },
+          {
+            "id": 3,
+            "question": "What does the main() function represent in a C program?",
+            "options": ["A library function", "The entry point of the program", "A variable declaration", "A loop structure"],
+            "correct": 1
+          }
+        ]
+      },
+      "project": {
+        "id": "hello_project",
+        "title": "Interactive Hello World",
+        "description": "Create a program that asks for the user's name and greets them personally",
+        "starterCode": "#include <stdio.h>\n\nint main() {\n    // Ask for user's name\n    // Read the name\n    // Print personalized greeting\n    return 0;\n}",
+        "solution": "#include <stdio.h>\n\nint main() {\n    char name[50];\n    \n    printf(\"What is your name? \");\n    scanf(\"%s\", name);\n    \n    printf(\"Hello, %s! Welcome to C programming!\\n\", name);\n    \n    return 0;\n}",
+        "hints": [
+          "Use scanf() to read input from the user",
+          "Use a character array to store the name",
+          "Use %s format specifier for strings"
+        ]
+      }
+    },
+    "module1": {
+      "id": "module1",
+      "title": "Basics of C Programming",
+      "description": "Learn variables, data types, operators, and basic I/O operations",
+      "lessons": {
+        "variables": {
+          "title": "Variables and Data Types",
+          "description": "Understanding how to declare and use variables in C",
+          "content": [
+            {
+              "section": "Basic Data Types",
+              "text": "C provides several basic data types to store different kinds of values:\n- int: for integers (whole numbers)\n- float: for single-precision floating-point numbers\n- double: for double-precision floating-point numbers\n- char: for single characters",
+              "code": "#include <stdio.h>\n\nint main() {\n    // Integer types\n    int age = 25;\n    short smallNum = 100;\n    long bigNum = 123456789L;\n    \n    // Floating-point types\n    float price = 19.99f;\n    double precisePrice = 19.99;\n    \n    // Character type\n    char grade = 'A';\n    char letter = 65;  // ASCII value of 'A'\n    \n    // Printing values\n    printf(\"Age: %d\\n\", age);\n    printf(\"Price: %.2f\\n\", price);\n    printf(\"Grade: %c\\n\", grade);\n    printf(\"Letter: %c\\n\", letter);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Variable Declaration and Initialization",
+              "text": "Variables must be declared before use. They can be declared and initialized separately or together.",
+              "code": "#include <stdio.h>\n\nint main() {\n    // Declaration\n    int x;\n    \n    // Initialization\n    x = 10;\n    \n    // Declaration and initialization\n    int y = 20;\n    \n    // Multiple variables\n    int a = 5, b = 10, c = 15;\n    \n    printf(\"x = %d, y = %d\\n\", x, y);\n    printf(\"a = %d, b = %d, c = %d\\n\", a, b, c);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Constants",
+              "text": "Constants are fixed values that cannot be changed during program execution. They can be defined using #define or const keyword.",
+              "code": "#include <stdio.h>\n#define PI 3.14159\n\nint main() {\n    // Using #define\n    printf(\"Value of PI: %.5f\\n\", PI);\n    \n    // Using const keyword\n    const int MAX_SIZE = 100;\n    printf(\"Max size: %d\\n\", MAX_SIZE);\n    \n    // MAX_SIZE = 200;  // This would cause a compile error\n    \n    return 0;\n}"
+            }
+          ]
+        },
+        "operators": {
+          "title": "Operators in C",
+          "description": "Learn about arithmetic, relational, logical, and other operators",
+          "content": [
+            {
+              "section": "Arithmetic Operators",
+              "text": "C provides basic arithmetic operators for mathematical operations: +, -, *, /, % (modulus).",
+              "code": "#include <stdio.h>\n\nint main() {\n    int a = 10, b = 3;\n    \n    printf(\"a + b = %d\\n\", a + b);  // Addition\n    printf(\"a - b = %d\\n\", a - b);  // Subtraction\n    printf(\"a * b = %d\\n\", a * b);  // Multiplication\n    printf(\"a / b = %d\\n\", a / b);  // Division\n    printf(\"a %% b = %d\\n\", a % b);  // Modulus (remainder)\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Relational and Logical Operators",
+              "text": "Relational operators compare values and return 1 (true) or 0 (false). Logical operators combine boolean expressions.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int x = 5, y = 10;\n    \n    // Relational operators\n    printf(\"x > y: %d\\n\", x > y);\n    printf(\"x < y: %d\\n\", x < y);\n    printf(\"x == y: %d\\n\", x == y);\n    printf(\"x != y: %d\\n\", x != y);\n    \n    // Logical operators\n    printf(\"(x > 0) && (y > 0): %d\\n\", (x > 0) && (y > 0));  // AND\n    printf(\"(x > 0) || (y < 0): %d\\n\", (x > 0) || (y < 0));  // OR\n    printf(\"!(x > y): %d\\n\", !(x > y));  // NOT\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Assignment and Increment/Decrement Operators",
+              "text": "Assignment operators assign values to variables. Increment/decrement operators increase or decrease values by 1.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int x = 10;\n    \n    // Assignment operators\n    x += 5;  // Equivalent to x = x + 5\n    printf(\"x += 5: %d\\n\", x);\n    \n    x -= 3;  // Equivalent to x = x - 3\n    printf(\"x -= 3: %d\\n\", x);\n    \n    // Increment/decrement operators\n    printf(\"x++: %d\\n\", x++);  // Post-increment\n    printf(\"x after post-increment: %d\\n\", x);\n    \n    printf(\"++x: %d\\n\", ++x);  // Pre-increment\n    printf(\"x after pre-increment: %d\\n\", x);\n    \n    return 0;\n}"
+            }
+          ]
+        },
+        "io": {
+          "title": "Input and Output",
+          "description": "Learn how to read input from users and display output",
+          "content": [
+            {
+              "section": "printf() Function",
+              "text": "printf() is used to display formatted output. Format specifiers like %d, %f, %c are used for different data types.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int age = 25;\n    float height = 5.9;\n    char initial = 'J';\n    \n    // Basic printing\n    printf(\"Hello, World!\\n\");\n    \n    // Printing variables\n    printf(\"Age: %d\\n\", age);\n    printf(\"Height: %.1f feet\\n\", height);\n    printf(\"Initial: %c\\n\", initial);\n    \n    // Multiple variables\n    printf(\"%c is %d years old and %.1f feet tall\\n\", initial, age, height);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "scanf() Function",
+              "text": "scanf() is used to read formatted input from the user. It's important to use the correct format specifiers.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int age;\n    float height;\n    char initial;\n    \n    printf(\"Enter your initial: \");\n    scanf(\" %c\", &initial);  // Note the space before %c\n    \n    printf(\"Enter your age: \");\n    scanf(\"%d\", &age);\n    \n    printf(\"Enter your height: \");\n    scanf(\"%f\", &height);\n    \n    printf(\"\\nYou entered:\\n\");\n    printf(\"Initial: %c\\n\", initial);\n    printf(\"Age: %d\\n\", age);\n    printf(\"Height: %.1f\\n\", height);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Format Specifiers and Escape Sequences",
+              "text": "Format specifiers control how data is displayed. Escape sequences are used for special characters.",
+              "code": "#include <stdio.h>\n\nint main() {\n    // Format specifiers\n    printf(\"Integer: %d\\n\", 42);\n    printf(\"Float: %f\\n\", 3.14159);\n    printf(\"Float (2 decimal places): %.2f\\n\", 3.14159);\n    printf(\"Character: %c\\n\", 'A');\n    printf(\"String: %s\\n\", \"Hello\");\n    \n    // Escape sequences\n    printf(\"New line: Line 1\\nLine 2\\n\");\n    printf(\"Tab: Column 1\\tColumn 2\\n\");\n    printf(\"Backslash: C:\\\\Users\\\\Name\\n\");\n    printf(\"Quotes: \\\"Hello World\\\"\\n\");\n    \n    return 0;\n}"
+            }
+          ]
+        }
+      },
+      "quiz": {
+        "title": "Module 1 Quiz",
+        "questions": [
+          {
+            "id": 1,
+            "question": "Which data type is used to store a single character?",
+            "options": ["int", "char", "float", "string"],
+            "correct": 1
+          },
+          {
+            "id": 2,
+            "question": "What is the output of: int x = 5; printf(\"%d\", x++);",
+            "options": ["5", "6", "7", "Error"],
+            "correct": 0
+          },
+          {
+            "id": 3,
+            "question": "Which format specifier is used for float values in printf()?",
+            "options": ["%d", "%c", "%f", "%s"],
+            "correct": 2
+          },
+          {
+            "id": 4,
+            "question": "What is the result of 10 % 3?",
+            "options": ["1", "3", "0.3", "3.33"],
+            "correct": 0
+          },
+          {
+            "id": 5,
+            "question": "Which operator is used for logical AND?",
+            "options": ["&", "&&", "|", "||"],
+            "correct": 1
+          }
+        ]
+      },
+      "project": {
+        "id": "calculator",
+        "title": "Basic Calculator",
+        "description": "Create a calculator that performs basic arithmetic operations",
+        "starterCode": "#include <stdio.h>\n\nint main() {\n    // Declare variables for two numbers and operator\n    // Read input from user\n    // Perform calculation based on operator\n    // Display result\n    return 0;\n}",
+        "solution": "#include <stdio.h>\n\nint main() {\n    double num1, num2, result;\n    char operator;\n    \n    printf(\"Enter an operator (+, -, *, /): \");\n    scanf(\" %c\", &operator);\n    \n    printf(\"Enter two numbers: \");\n    scanf(\"%lf %lf\", &num1, &num2);\n    \n    switch(operator) {\n        case '+':\n            result = num1 + num2;\n            break;\n        case '-':\n            result = num1 - num2;\n            break;\n        case '*':\n            result = num1 * num2;\n            break;\n        case '/':\n            if (num2 != 0) {\n                result = num1 / num2;\n            } else {\n                printf(\"Error! Division by zero.\\n\");\n                return -1;\n            }\n            break;\n        default:\n            printf(\"Error! Invalid operator.\\n\");\n            return -1;\n    }\n    \n    printf(\"%.2lf %c %.2lf = %.2lf\\n\", num1, operator, num2, result);\n    \n    return 0;\n}",
+        "hints": [
+          "Use a switch statement to handle different operators",
+          "Check for division by zero",
+          "Use %lf format specifier for double values"
+        ]
+      }
+    },
+    "module5": {
+      "id": "module5",
+      "title": "Pointers and Memory Management",
+      "description": "Master pointers, dynamic memory allocation, and memory layout",
+      "lessons": {
+        "pointers": {
+          "title": "Pointer Fundamentals",
+          "description": "Understanding what pointers are and how to use them effectively",
+          "content": [
+            {
+              "section": "What are Pointers?",
+              "text": "A pointer is a variable that stores the memory address of another variable. Pointers are powerful but can be tricky to understand. They allow direct memory manipulation and are essential for advanced C programming.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int num = 42;\n    int *ptr;  // Declare a pointer to int\n    \n    ptr = &num;  // Store address of num in ptr\n    \n    printf(\"Value of num: %d\\n\", num);\n    printf(\"Address of num: %p\\n\", &num);\n    printf(\"Value of ptr: %p\\n\", ptr);\n    printf(\"Value pointed by ptr: %d\\n\", *ptr);\n    \n    // Modify value through pointer\n    *ptr = 100;\n    printf(\"New value of num: %d\\n\", num);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Pointer Arithmetic",
+              "text": "Pointers can be incremented, decremented, and used in arithmetic operations. The increment/decrement depends on the size of the data type the pointer points to.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int arr[] = {10, 20, 30, 40, 50};\n    int *ptr = arr;  // Points to first element\n    \n    printf(\"First element: %d\\n\", *ptr);\n    \n    // Move to next element\n    ptr++;\n    printf(\"Second element: %d\\n\", *ptr);\n    \n    // Move two positions forward\n    ptr += 2;\n    printf(\"Fourth element: %d\\n\", *ptr);\n    \n    // Move back one position\n    ptr--;\n    printf(\"Third element: %d\\n\", *ptr);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Pointers and Arrays",
+              "text": "Arrays and pointers are closely related in C. The name of an array acts as a pointer to its first element. Array elements can be accessed using both array notation and pointer arithmetic.",
+              "code": "#include <stdio.h>\n\nint main() {\n    int arr[] = {1, 2, 3, 4, 5};\n    int *ptr = arr;\n    \n    // These are equivalent:\n    printf(\"arr[2] = %d\\n\", arr[2]);\n    printf(\"*(arr + 2) = %d\\n\", *(arr + 2));\n    printf(\"*(ptr + 2) = %d\\n\", *(ptr + 2));\n    printf(\"ptr[2] = %d\\n\", ptr[2]);\n    \n    // All print 3\n    \n    return 0;\n}"
+            }
+          ]
+        },
+        "memory": {
+          "title": "Dynamic Memory Allocation",
+          "description": "Learn how to allocate and deallocate memory at runtime",
+          "content": [
+            {
+              "section": "malloc() and free()",
+              "text": "malloc() allocates a block of memory of specified size and returns a pointer to the beginning of the block. free() deallocates the memory previously allocated by malloc().",
+              "code": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int n = 5;\n    int *ptr;\n    \n    // Allocate memory for n integers\n    ptr = (int*) malloc(n * sizeof(int));\n    \n    if (ptr == NULL) {\n        printf(\"Memory allocation failed!\\n\");\n        return -1;\n    }\n    \n    // Use the allocated memory\n    for (int i = 0; i < n; i++) {\n        ptr[i] = (i + 1) * 10;\n    }\n    \n    // Print values\n    printf(\"Values in allocated memory:\\n\");\n    for (int i = 0; i < n; i++) {\n        printf(\"%d \", ptr[i]);\n    }\n    printf(\"\\n\");\n    \n    // Free the allocated memory\n    free(ptr);\n    ptr = NULL;  // Good practice to avoid dangling pointer\n    \n    return 0;\n}"
+            },
+            {
+              "section": "calloc() and realloc()",
+              "text": "calloc() allocates memory and initializes all bits to zero. realloc() changes the size of previously allocated memory block.",
+              "code": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int *ptr;\n    int n = 5;\n    \n    // Allocate and initialize memory using calloc\n    ptr = (int*) calloc(n, sizeof(int));\n    \n    if (ptr == NULL) {\n        printf(\"Memory allocation failed!\\n\");\n        return -1;\n    }\n    \n    printf(\"Memory allocated by calloc (initialized to 0):\\n\");\n    for (int i = 0; i < n; i++) {\n        printf(\"%d \", ptr[i]);  // All values are 0\n    }\n    printf(\"\\n\");\n    \n    // Resize the memory block using realloc\n    n = 10;\n    ptr = (int*) realloc(ptr, n * sizeof(int));\n    \n    if (ptr == NULL) {\n        printf(\"Memory reallocation failed!\\n\");\n        return -1;\n    }\n    \n    // Initialize new elements\n    for (int i = 5; i < n; i++) {\n        ptr[i] = (i + 1) * 10;\n    }\n    \n    printf(\"After reallocation:\\n\");\n    for (int i = 0; i < n; i++) {\n        printf(\"%d \", ptr[i]);\n    }\n    printf(\"\\n\");\n    \n    // Free the memory\n    free(ptr);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Common Memory Errors",
+              "text": "Common memory-related errors include memory leaks, dangling pointers, and buffer overflows. Proper memory management is crucial for robust programs.",
+              "code": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int *ptr;\n    \n    // Memory leak example (BAD - memory not freed)\n    ptr = (int*) malloc(5 * sizeof(int));\n    ptr = (int*) malloc(10 * sizeof(int));  // Previous memory leaked!\n    free(ptr);\n    \n    // Dangling pointer example (BAD)\n    ptr = (int*) malloc(5 * sizeof(int));\n    free(ptr);\n    // *ptr = 10;  // Dangerous! ptr is now a dangling pointer\n    \n    // Buffer overflow example (BAD)\n    int arr[5] = {1, 2, 3, 4, 5};\n    // arr[10] = 100;  // Buffer overflow! Writing beyond array bounds\n    \n    // Correct approach\n    ptr = (int*) malloc(5 * sizeof(int));\n    if (ptr != NULL) {\n        for (int i = 0; i < 5; i++) {\n            ptr[i] = i + 1;\n        }\n        free(ptr);\n        ptr = NULL;  // Prevent dangling pointer\n    }\n    \n    return 0;\n}"
+            }
+          ]
+        },
+        "layout": {
+          "title": "Memory Layout",
+          "description": "Understanding how memory is organized in a C program",
+          "content": [
+            {
+              "section": "Memory Segments",
+              "text": "A C program's memory is divided into several segments:\n1. Text segment: Stores executable code\n2. Data segment: Stores global and static variables\n3. Heap: Dynamic memory allocation\n4. Stack: Function calls and local variables",
+              "code": "#include <stdio.h>\n#include <stdlib.h>\n\n// Global variable (stored in data segment)\nint globalVar = 100;\n\nvoid function() {\n    // Local variable (stored in stack)\n    int localVar = 10;\n    printf(\"Local variable: %d\\n\", localVar);\n}\n\nint main() {\n    // Local variable (stored in stack)\n    int stackVar = 50;\n    \n    // Dynamically allocated memory (stored in heap)\n    int *heapVar = (int*) malloc(sizeof(int));\n    *heapVar = 200;\n    \n    printf(\"Global variable: %d\\n\", globalVar);\n    printf(\"Stack variable: %d\\n\", stackVar);\n    printf(\"Heap variable: %d\\n\", *heapVar);\n    \n    function();\n    \n    free(heapVar);\n    \n    return 0;\n}"
+            },
+            {
+              "section": "Stack vs Heap",
+              "text": "Stack memory is automatically managed and fast, but limited in size. Heap memory is larger but requires manual management. Stack variables are automatically destroyed when they go out of scope, while heap memory must be explicitly freed.",
+              "code": "#include <stdio.h>\n#include <stdlib.h>\n\nvoid stackExample() {\n    int arr[1000];  // Allocated on stack\n    printf(\"Stack array address: %p\\n\", arr);\n    // Automatically deallocated when function returns\n}\n\nvoid heapExample() {\n    int *arr = (int*) malloc(1000 * sizeof(int));  // Allocated on heap\n    printf(\"Heap array address: %p\\n\", arr);\n    free(arr);  // Must be explicitly freed\n}\n\nint main() {\n    stackExample();\n    heapExample();\n    \n    return 0;\n}"
+            }
+          ]
+        }
+      },
+      "quiz": {
+        "title": "Module 5 Quiz",
+        "questions": [
+          {
+            "id": 1,
+            "question": "What does the * operator do with a pointer?",
+            "options": ["Multiplies two numbers", "Declares a pointer", "Dereferences a pointer", "Allocates memory"],
+            "correct": 2
+          },
+          {
+            "id": 2,
+            "question": "Which function is used to allocate memory dynamically?",
+            "options": ["alloc()", "malloc()", "new()", "create()"],
+            "correct": 1
+          },
+          {
+            "id": 3,
+            "question": "What is the purpose of the free() function?",
+            "options": ["To clear screen", "To deallocate memory", "To close files", "To exit program"],
+            "correct": 1
+          },
+          {
+            "id": 4,
+            "question": "What happens when you increment a pointer?",
+            "options": ["Adds 1 to the address", "Adds size of data type to the address", "Multiplies address by 2", "Sets pointer to NULL"],
+            "correct": 1
+          },
+          {
+            "id": 5,
+            "question": "Which memory segment stores global variables?",
+            "options": ["Stack", "Heap", "Text", "Data"],
+            "correct": 3
+          }
+        ]
+      },
+      "project": {
+        "id": "memory_manager",
+        "title": "Dynamic Array Manager",
+        "description": "Create a program that manages a dynamic array with add, remove, and resize operations",
+        "starterCode": "#include <stdio.h>\n#include <stdlib.h>\n\n// Define structure for dynamic array\n// Implement functions for add, remove, resize\n\nint main() {\n    // Initialize dynamic array\n    // Implement menu-driven interface\n    return 0;\n}",
+        "solution": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct {\n    int *data;\n    int size;\n    int capacity;\n} DynamicArray;\n\nvoid initArray(DynamicArray *arr, int initialCapacity) {\n    arr->data = (int*) malloc(initialCapacity * sizeof(int));\n    arr->size = 0;\n    arr->capacity = initialCapacity;\n}\n\nvoid resizeArray(DynamicArray *arr) {\n    arr->capacity *= 2;\n    arr->data = (int*) realloc(arr->data, arr->capacity * sizeof(int));\n}\n\nvoid addElement(DynamicArray *arr, int element) {\n    if (arr->size >= arr->capacity) {\n        resizeArray(arr);\n    }\n    arr->data[arr->size] = element;\n    arr->size++;\n}\n\nvoid removeElement(DynamicArray *arr, int index) {\n    if (index < 0 || index >= arr->size) {\n        printf(\"Invalid index!\\n\");\n        return;\n    }\n    \n    for (int i = index; i < arr->size - 1; i++) {\n        arr->data[i] = arr->data[i + 1];\n    }\n    arr->size--;\n}\n\nvoid printArray(DynamicArray *arr) {\n    printf(\"Array (size: %d, capacity: %d): \", arr->size, arr->capacity);\n    for (int i = 0; i < arr->size; i++) {\n        printf(\"%d \", arr->data[i]);\n    }\n    printf(\"\\n\");\n}\n\nvoid freeArray(DynamicArray *arr) {\n    free(arr->data);\n    arr->data = NULL;\n    arr->size = 0;\n    arr->capacity = 0;\n}\n\nint main() {\n    DynamicArray arr;\n    initArray(&arr, 2);\n    \n    int choice, element, index;\n    \n    while (1) {\n        printf(\"\\nDynamic Array Manager\\n\");\n        printf(\"1. Add element\\n\");\n        printf(\"2. Remove element\\n\");\n        printf(\"3. Print array\\n\");\n        printf(\"4. Exit\\n\");\n        printf(\"Enter your choice: \");\n        scanf(\"%d\", &choice);\n        \n        switch (choice) {\n            case 1:\n                printf(\"Enter element to add: \");\n                scanf(\"%d\", &element);\n                addElement(&arr, element);\n                break;\n            case 2:\n                printf(\"Enter index to remove: \");\n                scanf(\"%d\", &index);\n                removeElement(&arr, index);\n                break;\n            case 3:\n                printArray(&arr);\n                break;\n            case 4:\n                freeArray(&arr);\n                exit(0);\n            default:\n                printf(\"Invalid choice!\\n\");\n        }\n    }\n    \n    return 0;\n}",
+        "hints": [
+          "Use a struct to represent the dynamic array with data pointer, size, and capacity",
+          "Implement functions for initialization, adding elements, removing elements, and resizing",
+          "Use realloc() to resize the array when needed",
+          "Remember to free allocated memory when done"
+        ]
+      }
+    }
+  }
+}

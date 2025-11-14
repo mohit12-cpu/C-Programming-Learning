@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Programming Learning Website</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/toolbar/prism-toolbar.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>C Programming Learning</h1>
+            <nav>
+                <ul>
+                    <li><a href="#/home" data-route="home">Home</a></li>
+                    <li><a href="#/lessons" data-route="lessons">Lessons</a></li>
+                    <li><a href="#/editor" data-route="editor">Code Editor</a></li>
+                    <li><a href="#/visualizer" data-route="visualizer">Visualizer</a></li>
+                    <li><a href="#/quizzes" data-route="quizzes">Quizzes</a></li>
+                    <li><a href="#/projects" data-route="projects">Projects</a></li>
+                    <li><a href="#/challenges" data-route="challenges">Challenges</a></li>
+                    <li><a href="#/flashcards" data-route="flashcards">Flashcards</a></li>
+                    <li><a href="#/interview" data-route="interview">Interview Prep</a></li>
+                    <li><a href="#/progress" data-route="progress">Progress</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button id="themeToggle">🌞</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="app">
+        <!-- Content will be loaded here dynamically -->
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 C Programming Learning Website. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/router.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+    
+    <!-- View Controllers -->
+    <script src="js/views/home.js"></script>
+    <script src="js/views/lessons.js"></script>
+    <script src="js/views/editor.js"></script>
+    <script src="js/views/visualizer.js"></script>
+    <script src="js/views/quizzes.js"></script>
+    <script src="js/views/projects.js"></script>
+    <script src="js/views/challenges.js"></script>
+    <script src="js/views/flashcards.js"></script>
+    <script src="js/views/interview.js"></script>
+    <script src="js/views/snippets.js"></script>
+    <script src="js/views/simulator.js"></script>
+    <script src="js/views/progress.js"></script>
+</body>
+</html>
