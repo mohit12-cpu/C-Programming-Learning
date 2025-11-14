@@ -55,5 +55,107 @@
         "correct": 2
       }
     ]
+  },
+  "basics_quiz": {
+    "title": "Basics of C Programming Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is C programming language primarily used for?",
+        "options": ["Web development", "System programming", "Mobile apps", "Game development"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "Which of the following is a valid C identifier?",
+        "options": ["123var", "_myVar", "my-var", "int"],
+        "correct": 1
+      }
+    ]
+  },
+  "functions_quiz": {
+    "title": "Functions Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the purpose of a function in C?",
+        "options": ["To store data", "To perform a specific task", "To declare variables", "To compile code"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "What is the difference between pass by value and pass by reference?",
+        "options": ["No difference", "Pass by value copies the value, pass by reference passes the address", "Pass by reference is faster", "Pass by value is safer"],
+        "correct": 1
+      }
+    ]
+  },
+  "compound_data_quiz": {
+    "title": "Compound Data Types Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the main difference between a structure and a union?",
+        "options": ["No difference", "Structure members share memory, union members have separate memory", "Union members share memory, structure members have separate memory", "Union is faster"],
+        "correct": 2
+      },
+      {
+        "id": 2,
+        "question": "What is the index of the first element in an array?",
+        "options": ["1", "0", "-1", "Depends on the array"],
+        "correct": 1
+      }
+    ]
+  },
+  "memory_management_quiz": {
+    "title": "Memory Management Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Which function is used to allocate memory dynamically in C?",
+        "options": ["alloc()", "malloc()", "new()", "create()"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "What is the purpose of the free() function?",
+        "options": ["To clear screen", "To deallocate memory", "To close files", "To exit program"],
+        "correct": 1
+      }
+    ]
+  },
+  "file_handling_quiz": {
+    "title": "File Handling Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Which function is used to open a file in C?",
+        "options": ["open()", "fopen()", "file()", "create()"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "What does EOF stand for?",
+        "options": ["End of File", "End of Function", "End of Format", "End of Frame"],
+        "correct": 0
+      }
+    ]
+  },
+  "miscellaneous_quiz": {
+    "title": "Miscellaneous Concepts Quiz",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the purpose of #include directive?",
+        "options": ["To define a macro", "To include header files", "To declare a variable", "To start the main function"],
+        "correct": 1
+      },
+      {
+        "id": 2,
+        "question": "Which storage class is used for variables that retain their value between function calls?",
+        "options": ["auto", "register", "static", "extern"],
+        "correct": 2
+      }
+    ]
   }
 }

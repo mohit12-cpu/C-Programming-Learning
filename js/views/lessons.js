@@ -41,6 +41,7 @@ window.viewControllers['lessons'] = {
                                     <button class="btn btn-primary" id="nextLesson" disabled>Next</button>
                                     <button class="btn btn-outline" id="bookmarkLesson">Bookmark</button>
                                     <button class="btn btn-outline" id="takeQuiz" style="display: none;">Take Quiz</button>
+                                    <button class="btn btn-success" id="markCompleted" style="display: none;">Mark as Completed</button>
                                 </div>
                             </div>
                         </div>
@@ -72,6 +73,7 @@ window.viewControllers['lessons'] = {
         const nextButton = document.getElementById('nextLesson');
         const bookmarkButton = document.getElementById('bookmarkLesson');
         const quizButton = document.getElementById('takeQuiz');
+        const markCompletedButton = document.getElementById('markCompleted');
         
         if (prevButton) {
             prevButton.addEventListener('click', () => {
@@ -96,35 +98,20 @@ window.viewControllers['lessons'] = {
                 this.takeQuiz();
             });
         }
+        
+        if (markCompletedButton) {
+            markCompletedButton.addEventListener('click', () => {
+                this.toggleCompleted();
+            });
+        }
     },
     
     populateLessonList: function() {
         const lessonList = document.getElementById('lessonList');
         if (!lessonList) return;
         
-        // Sample lessons data - in a real implementation, this would come from a JSON file
-        const lessons = {
-            "setup": {
-                "title": "Environment Setup & Hello World",
-                "description": "Learn how to set up your C development environment and write your first program"
-            },
-            "variables": {
-                "title": "Variables and Data Types",
-                "description": "Understanding how to declare and use variables in C"
-            },
-            "operators": {
-                "title": "Operators in C",
-                "description": "Learn about arithmetic, relational, logical, and other operators"
-            },
-            "pointers": {
-                "title": "Pointer Fundamentals",
-                "description": "Understanding what pointers are and how to use them effectively"
-            },
-            "memory": {
-                "title": "Dynamic Memory Allocation",
-                "description": "Learn how to allocate and deallocate memory at runtime"
-            }
-        };
+        // Get lessons from the global app object
+        const lessons = window.app ? window.app.lessons : {};
         
         const lessonKeys = Object.keys(lessons);
         
@@ -137,16 +124,79 @@ window.viewControllers['lessons'] = {
         let lessonHTML = '';
         lessonKeys.forEach((key, index) => {
             const lesson = lessons[key];
-            lessonHTML += `
-                <li>
-                    <a href="#/lessons/${key}" data-lesson="${key}">
-                        ${index + 1}. ${lesson.title}
-                    </a>
-                </li>
-            `;
+            // Check if this is one of our new sections (section13 through section20)
+            if (key.startsWith('section')) {
+                lessonHTML += `
+                    <li class="syllabus-section">
+                        <div class="section-header" data-section="${key}">
+                            <span class="section-title">${lesson.title}</span>
+                            <span class="section-toggle">+</span>
+                        </div>
+                        <div class="section-content" id="content-${key}" style="display: none;">
+                            <p>${lesson.description}</p>
+                            <ul class="topics-list">
+                                ${lesson.topics.map(topic => `<li>${topic}</li>`).join('')}
+                            </ul>
+                            ${lesson.externalLinks ? `
+                                <div class="external-links">
+                                    ${lesson.externalLinks.map(link => 
+                                        `<a href="${link.url}" target="_blank" class="btn btn-outline btn-small">${link.title}</a>`
+                                    ).join('')}
+                                </div>
+                            ` : ''}
+                            <div class="section-actions">
+                                ${lesson.quiz ? `<button class="btn btn-outline take-quiz-btn" data-quiz="${lesson.quiz}">Take Quiz</button>` : ''}
+                                <button class="btn btn-success mark-completed-btn" data-section="${key}">Mark as Completed</button>
+                            </div>
+                        </div>
+                    </li>
+                `;
+            } else {
+                // For existing lessons, keep the original format
+                lessonHTML += `
+                    <li>
+                        <a href="#/lessons/${key}" data-lesson="${key}">
+                            ${index + 1}. ${lesson.title}
+                        </a>
+                    </li>
+                `;
+            }
         });
         
         lessonList.innerHTML = lessonHTML;
+        
+        // Add click event listeners to section headers for expand/collapse
+        document.querySelectorAll('.section-header').forEach(header => {
+            header.addEventListener('click', (e) => {
+                const sectionId = header.getAttribute('data-section');
+                const content = document.getElementById(`content-${sectionId}`);
+                const toggle = header.querySelector('.section-toggle');
+                
+                if (content.style.display === 'none') {
+                    content.style.display = 'block';
+                    toggle.textContent = '-';
+                } else {
+                    content.style.display = 'none';
+                    toggle.textContent = '+';
+                }
+            });
+        });
+        
+        // Add click event listeners to quiz buttons
+        document.querySelectorAll('.take-quiz-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const quizId = e.target.getAttribute('data-quiz');
+                window.location.hash = `#/quizzes/${quizId}`;
+            });
+        });
+        
+        // Add click event listeners to mark completed buttons
+        document.querySelectorAll('.mark-completed-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const sectionId = e.target.getAttribute('data-section');
+                this.toggleSectionCompleted(sectionId);
+            });
+        });
         
         // Add click event listeners to lesson links
         document.querySelectorAll('[data-lesson]').forEach(link => {
@@ -159,64 +209,8 @@ window.viewControllers['lessons'] = {
     },
     
     showLesson: function(lessonId) {
-        // Sample lesson content - in a real implementation, this would come from a JSON file
-        const lessons = {
-            "setup": {
-                "title": "Environment Setup & Hello World",
-                "content": [
-                    {
-                        "section": "Introduction to C",
-                        "text": "C is a general-purpose programming language developed by Dennis Ritchie at Bell Labs in the early 1970s. It is known for its efficiency, flexibility, and close-to-hardware programming capabilities. C is widely used for system programming, embedded systems, and application development.",
-                        "code": "#include <stdio.h>\\n\\nint main() {\\n    printf(\\\"Hello, World!\\\\n\\\");\\n    return 0;\\n}"
-                    },
-                    {
-                        "section": "Setting Up Your Environment",
-                        "text": "To write and run C programs, you need a text editor and a compiler. Popular options include GCC (GNU Compiler Collection), Clang, and IDEs like Code::Blocks, Dev-C++, or Visual Studio Code with C extensions.",
-                        "code": "// To compile and run a C program from command line:\\n// gcc -o hello hello.c\\n// ./hello"
-                    }
-                ]
-            },
-            "variables": {
-                "title": "Variables and Data Types",
-                "content": [
-                    {
-                        "section": "Basic Data Types",
-                        "text": "C provides several basic data types to store different kinds of values:\\n- int: for integers (whole numbers)\\n- float: for single-precision floating-point numbers\\n- double: for double-precision floating-point numbers\\n- char: for single characters",
-                        "code": "#include <stdio.h>\\n\\nint main() {\\n    // Integer types\\n    int age = 25;\\n    short smallNum = 100;\\n    long bigNum = 123456789L;\\n    \\n    // Floating-point types\\n    float price = 19.99f;\\n    double precisePrice = 19.99;\\n    \\n    // Character type\\n    char grade = 'A';\\n    char letter = 65;  // ASCII value of 'A'\\n    \\n    // Printing values\\n    printf(\\\"Age: %d\\\\n\\\", age);\\n    printf(\\\"Price: %.2f\\\\n\\\", price);\\n    printf(\\\"Grade: %c\\\\n\\\", grade);\\n    printf(\\\"Letter: %c\\\\n\\\", letter);\\n    \\n    return 0;\\n}"
-                    }
-                ]
-            },
-            "operators": {
-                "title": "Operators in C",
-                "content": [
-                    {
-                        "section": "Arithmetic Operators",
-                        "text": "C provides basic arithmetic operators for mathematical operations: +, -, *, /, % (modulus).",
-                        "code": "#include <stdio.h>\\n\\nint main() {\\n    int a = 10, b = 3;\\n    \\n    printf(\\\"a + b = %d\\\\n\\\", a + b);  // Addition\\n    printf(\\\"a - b = %d\\\\n\\\", a - b);  // Subtraction\\n    printf(\\\"a * b = %d\\\\n\\\", a * b);  // Multiplication\\n    printf(\\\"a / b = %d\\\\n\\\", a / b);  // Division\\n    printf(\\\"a %% b = %d\\\\n\\\", a % b);  // Modulus (remainder)\\n    \\n    return 0;\\n}"
-                    }
-                ]
-            },
-            "pointers": {
-                "title": "Pointer Fundamentals",
-                "content": [
-                    {
-                        "section": "What are Pointers?",
-                        "text": "A pointer is a variable that stores the memory address of another variable. Pointers are powerful but can be tricky to understand. They allow direct memory manipulation and are essential for advanced C programming.",
-                        "code": "#include <stdio.h>\\n\\nint main() {\\n    int num = 42;\\n    int *ptr;  // Declare a pointer to int\\n    \\n    ptr = &num;  // Store address of num in ptr\\n    \\n    printf(\\\"Value of num: %d\\\\n\\\", num);\\n    printf(\\\"Address of num: %p\\\\n\\\", &num);\\n    printf(\\\"Value of ptr: %p\\\\n\\\", ptr);\\n    printf(\\\"Value pointed by ptr: %d\\\\n\\\", *ptr);\\n    \\n    // Modify value through pointer\\n    *ptr = 100;\\n    printf(\\\"New value of num: %d\\\\n\\\", num);\\n    \\n    return 0;\\n}"
-                    }
-                ]
-            },
-            "memory": {
-                "title": "Dynamic Memory Allocation",
-                "content": [
-                    {
-                        "section": "malloc() and free()",
-                        "text": "malloc() allocates a block of memory of specified size and returns a pointer to the beginning of the block. free() deallocates the memory previously allocated by malloc().",
-                        "code": "#include <stdio.h>\\n#include <stdlib.h>\\n\\nint main() {\\n    int n = 5;\\n    int *ptr;\\n    \\n    // Allocate memory for n integers\\n    ptr = (int*) malloc(n * sizeof(int));\\n    \\n    if (ptr == NULL) {\\n        printf(\\\"Memory allocation failed!\\\\n\\\");\\n        return -1;\\n    }\\n    \\n    // Use the allocated memory\\n    for (int i = 0; i < n; i++) {\\n        ptr[i] = (i + 1) * 10;\\n    }\\n    \\n    // Print values\\n    printf(\\\"Values in allocated memory:\\\\n\\\");\\n    for (int i = 0; i < n; i++) {\\n        printf(\\\"%d \\\", ptr[i]);\\n    }\\n    printf(\\\"\\\\n\\\");\\n    \\n    // Free the allocated memory\\n    free(ptr);\\n    ptr = NULL;  // Good practice to avoid dangling pointer\\n    \\n    return 0;\\n}"
-                    }
-                ]
-            }
-        };
+        // Get lessons from the global app object
+        const lessons = window.app ? window.app.lessons : {};
         
         const lesson = lessons[lessonId];
         if (!lesson) {
@@ -297,29 +291,16 @@ window.viewControllers['lessons'] = {
         // Show quiz button if lesson has quiz
         this.updateQuizButton(lessonId);
         
+        // Show mark completed button
+        this.updateMarkCompletedButton(lessonId);
+        
         // Mark lesson as completed
         this.markLessonAsCompleted(lessonId);
     },
     
     updateNavigation: function(currentLessonId) {
-        // Sample lessons data - in a real implementation, this would come from a JSON file
-        const lessons = {
-            "setup": {
-                "title": "Environment Setup & Hello World"
-            },
-            "variables": {
-                "title": "Variables and Data Types"
-            },
-            "operators": {
-                "title": "Operators in C"
-            },
-            "pointers": {
-                "title": "Pointer Fundamentals"
-            },
-            "memory": {
-                "title": "Dynamic Memory Allocation"
-            }
-        };
+        // Get lessons from the global app object
+        const lessons = window.app ? window.app.lessons : {};
         
         const lessonKeys = Object.keys(lessons);
         const currentIndex = lessonKeys.indexOf(currentLessonId);
@@ -377,17 +358,111 @@ window.viewControllers['lessons'] = {
     
     updateQuizButton: function(lessonId) {
         const quizButton = document.getElementById('takeQuiz');
-        // In a real implementation, we would check if there's a quiz for this lesson
-        const hasQuiz = lessonId === "setup" || lessonId === "variables"; // Sample logic
+        // Get lessons from the global app object
+        const lessons = window.app ? window.app.lessons : {};
+        const lesson = lessons[lessonId];
+        
+        // Check if lesson has a quiz
+        const hasQuiz = lesson && lesson.quiz;
         
         if (hasQuiz) {
             quizButton.style.display = 'inline-block';
             quizButton.onclick = () => {
-                window.location.hash = `#/quizzes/${lessonId}`;
+                window.location.hash = `#/quizzes/${lesson.quiz}`;
             };
         } else {
             quizButton.style.display = 'none';
         }
+    },
+    
+    updateMarkCompletedButton: function(lessonId) {
+        const markCompletedButton = document.getElementById('markCompleted');
+        // Load progress
+        let progress = StorageHelper.loadProgress() || {
+            xp: 0,
+            lessonsCompleted: [],
+            quizzesTaken: [],
+            projectsCompleted: []
+        };
+        
+        // Check if lesson is already completed
+        const isCompleted = progress.lessonsCompleted.includes(lessonId);
+        
+        markCompletedButton.textContent = isCompleted ? 'Completed' : 'Mark as Completed';
+        markCompletedButton.onclick = () => {
+            this.toggleLessonCompleted(lessonId);
+        };
+        
+        markCompletedButton.style.display = 'inline-block';
+    },
+    
+    toggleLessonCompleted: function(lessonId) {
+        // Load progress
+        let progress = StorageHelper.loadProgress() || {
+            xp: 0,
+            lessonsCompleted: [],
+            quizzesTaken: [],
+            projectsCompleted: []
+        };
+        
+        const markCompletedButton = document.getElementById('markCompleted');
+        const isCurrentlyCompleted = progress.lessonsCompleted.includes(lessonId);
+        
+        if (isCurrentlyCompleted) {
+            // Remove from completed
+            const index = progress.lessonsCompleted.indexOf(lessonId);
+            if (index > -1) {
+                progress.lessonsCompleted.splice(index, 1);
+            }
+            markCompletedButton.textContent = 'Mark as Completed';
+        } else {
+            // Add to completed
+            progress.lessonsCompleted.push(lessonId);
+            progress.xp += 10; // 10 XP for completing a lesson
+            
+            markCompletedButton.textContent = 'Completed';
+            
+            // Show notification
+            this.showNotification(`🎉 Lesson completed! You earned 10 XP.`);
+        }
+        
+        // Save progress
+        StorageHelper.saveProgress(progress);
+    },
+    
+    toggleSectionCompleted: function(sectionId) {
+        // Load progress
+        let progress = StorageHelper.loadProgress() || {
+            xp: 0,
+            lessonsCompleted: [],
+            quizzesTaken: [],
+            projectsCompleted: []
+        };
+        
+        const isCurrentlyCompleted = progress.lessonsCompleted.includes(sectionId);
+        
+        if (isCurrentlyCompleted) {
+            // Remove from completed
+            const index = progress.lessonsCompleted.indexOf(sectionId);
+            if (index > -1) {
+                progress.lessonsCompleted.splice(index, 1);
+            }
+            // Update button text
+            document.querySelector(`.mark-completed-btn[data-section="${sectionId}"]`).textContent = 'Mark as Completed';
+        } else {
+            // Add to completed
+            progress.lessonsCompleted.push(sectionId);
+            progress.xp += 10; // 10 XP for completing a section
+            
+            // Update button text
+            document.querySelector(`.mark-completed-btn[data-section="${sectionId}"]`).textContent = 'Completed';
+            
+            // Show notification
+            this.showNotification(`🎉 Section completed! You earned 10 XP.`);
+        }
+        
+        // Save progress
+        StorageHelper.saveProgress(progress);
     },
     
     markLessonAsCompleted: function(lessonId) {
@@ -439,15 +514,15 @@ window.viewControllers['lessons'] = {
     },
     
     filterLessons: function(term) {
-        const lessons = document.querySelectorAll('[data-lesson]');
+        const lessons = document.querySelectorAll('[data-lesson], .syllabus-section');
         term = term.toLowerCase();
         
         lessons.forEach(lesson => {
             const text = lesson.textContent.toLowerCase();
             if (text.includes(term)) {
-                lesson.parentElement.style.display = 'block';
+                lesson.style.display = 'block';
             } else {
-                lesson.parentElement.style.display = 'none';
+                lesson.style.display = 'none';
             }
         });
     },
@@ -462,5 +537,9 @@ window.viewControllers['lessons'] = {
     
     toggleBookmark: function() {
         // This will be handled by the updateBookmarkButton function
+    },
+    
+    toggleCompleted: function() {
+        // This will be handled by the updateMarkCompletedButton function
     }
 };

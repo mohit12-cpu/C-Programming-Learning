@@ -34,11 +34,21 @@ class SearchSystem {
             Object.keys(app.lessons).forEach(key => {
                 const lesson = app.lessons[key];
                 let content = lesson.description || '';
+                
+                // For regular lessons with content
                 if (lesson.content) {
                     lesson.content.forEach(section => {
                         content += ' ' + section.text;
                     });
                 }
+                
+                // For new syllabus sections with topics
+                if (lesson.topics) {
+                    lesson.topics.forEach(topic => {
+                        content += ' ' + topic;
+                    });
+                }
+                
                 this.contentIndex.push({
                     type: 'lesson',
                     id: key,

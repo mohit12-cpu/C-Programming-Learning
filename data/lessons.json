@@ -104,5 +104,119 @@
         "code": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    FILE *fp;\n    char data[100];\n    \n    // Writing to a file\n    fp = fopen(\"example.txt\", \"w\");\n    \n    if (fp == NULL) {\n        printf(\"Error opening file for writing!\\n\");\n        return -1;\n    }\n    \n    fprintf(fp, \"This is a sample file.\\n\");\n    fprintf(fp, \"It contains multiple lines.\\n\");\n    \n    fclose(fp);\n    \n    // Reading from a file\n    fp = fopen(\"example.txt\", \"r\");\n    \n    if (fp == NULL) {\n        printf(\"Error opening file for reading!\\n\");\n        return -1;\n    }\n    \n    while (fgets(data, 100, fp) != NULL) {\n        printf(\"%s\", data);\n    }\n    \n    fclose(fp);\n    \n    return 0;\n}"
       }
     ]
+  },
+  "section13": {
+    "title": "Basics",
+    "description": "Include foundational C concepts that teach users how to store data, output data, perform operations, and control program flow.",
+    "topics": [
+      "C Introduction",
+      "Compilation Process",
+      "Identifiers",
+      "C Keywords",
+      "C Variables",
+      "Data Types in C",
+      "Input and Output in C",
+      "Operators",
+      "Conditional Statements",
+      "Loops"
+    ],
+    "tags": ["basics"],
+    "quiz": "basics_quiz"
+  },
+  "section14": {
+    "title": "Functions",
+    "description": "Introduce modular programming and reusable blocks of code.",
+    "topics": [
+      "Functions in C",
+      "Parameter Passing Techniques",
+      "Main Function",
+      "Recursion",
+      "Inline Function",
+      "Nested Functions"
+    ],
+    "tags": ["functions"],
+    "quiz": "functions_quiz"
+  },
+  "section15": {
+    "title": "Compound Data Types",
+    "description": "Explain how primitive data types combine to create more complex and realistic data structures.",
+    "topics": [
+      "Arrays in C",
+      "Pointers in C",
+      "Strings in C",
+      "Structures",
+      "Unions",
+      "Enumeration (enum)"
+    ],
+    "tags": ["arrays", "pointers", "structures"],
+    "quiz": "compound_data_quiz"
+  },
+  "section16": {
+    "title": "Memory Management",
+    "description": "Teach manual memory control using pointers and dynamic allocation.",
+    "topics": [
+      "Program Memory Layout",
+      "Dynamic Memory Allocation (malloc, calloc, realloc, free)",
+      "Memory Leaks and Prevention"
+    ],
+    "tags": ["memory", "pointers"],
+    "quiz": "memory_management_quiz"
+  },
+  "section17": {
+    "title": "File Handling",
+    "description": "Explain how to create, read, write, delete, and manage files in C.",
+    "topics": [
+      "Basics of File Handling",
+      "Read a File",
+      "Read/Write Structures in File",
+      "EOF, getc(), feof()",
+      "Delete a File"
+    ],
+    "tags": ["files"],
+    "quiz": "file_handling_quiz"
+  },
+  "section18": {
+    "title": "Error Handling",
+    "description": "Describe debugging and error management manually in C.",
+    "topics": [
+      "Error Handling in C (perror, strerror)",
+      "Exception Handling using goto",
+      "File Error Handling",
+      "Divide by Zero Handling"
+    ],
+    "tags": ["error-handling"]
+  },
+  "section19": {
+    "title": "Miscellaneous Concepts",
+    "description": "Advanced and essential tools that don't fit in other categories.",
+    "topics": [
+      "C Preprocessors",
+      "Macros & Types",
+      "Header Files",
+      "Date and Time",
+      "Linkage (Internal / External)",
+      "Storage Classes"
+    ],
+    "tags": ["preprocessor", "advanced"],
+    "quiz": "miscellaneous_quiz"
+  },
+  "section20": {
+    "title": "Advanced Concepts",
+    "description": "Add real-world, high-level C concepts used in systems programming.",
+    "topics": [
+      "Variadic Functions",
+      "System Call I/O",
+      "Signals",
+      "Socket Programming",
+      "_Generic Keyword",
+      "Multithreading (pthread basics)"
+    ],
+    "tags": ["advanced", "systems"],
+    "externalLinks": [
+      {
+        "title": "C Standard Library Documentation",
+        "url": "https://en.cppreference.com/w/c"
+      }
+    ]
   }
 }
